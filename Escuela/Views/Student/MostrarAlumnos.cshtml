@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewData["Title"] = "MostrarAlumnos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1 class=" animate__animated animate__rubberBand">Student´s List</h1>
+
+
+<button type="submit" class="btn btn-warning animate__animated animate__rollIn"> @Html.ActionLink("Save new student", "SaveStu")</button>
+<br/>
+
+<table id="mitablastu" class="table table-dark table-hover">
+    <thead>
+        <tr>
+            <th>LastName</th>
+            <th>MidName</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+
+    </thead>
+
+</table>
+
+@section scripts{
+
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+
+            var tabla = $('#mitablastu').DataTable({
+                "ajax": {
+                    "url": '/Student/GetAll',
+                    "type": "get",
+                    "datatype": "json"
+                },
+                "columns": [
+                    { "data": "lastName", "name": "lastName", "autoWidth": true },
+                    { "data": "firstMidName", "name": "firstMidName", "autoWidth": true },
+                    { "data": "enrollmentsDate", "name": "enrollmentsDate", "autoWidth": true }
+
+                ]
+
+
+            })
+        })
+    </script>
+
+}
